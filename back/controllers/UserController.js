@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt')
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
-
+const db = require('../mysqlconfig')
 
 
 
@@ -16,11 +16,12 @@ exports.signup = (req, res, next) => {
 
             })
 
-
+const dbUser = db.query(`INSERT INTO user (userName, email, password) VALUES('${userName}','${email}','${password}')`)
 
                 .then(() =>
 
                     res.status(201).json({ message: 'Utilisateur créé !' }))
+                    db.connect(dbUser)
                 .catch(error => res.status(400).json({ error }));
         })
         .catch(error => res.status(500).json({ error }));
