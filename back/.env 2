@@ -1,0 +1,4 @@
+NAME = name sql
+PASS = pass sql
+HOST = your host
+TOKEN = your token
