@@ -4,7 +4,7 @@ const app = express();
 const userRoutes = require('./routes/user');
 const path = require('path');
 const bodyParser = require('body-Parser');
-const dataBase =require('./mysqlconfig')
+const dataBase =require('./dbconfig')
 require('dotenv').config();
 const helmet = require('helmet');
 
