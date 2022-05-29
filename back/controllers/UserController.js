@@ -1,11 +1,10 @@
 const bcrypt = require('bcrypt')
-const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 const db = require('../dbconfig')
 
 exports.signup = (req, res, next) => {
     bcrypt.hash(req.body.password, 10)
-    
+
         .then(hash => {
 
             const userName = req.body.userName;
@@ -53,11 +52,8 @@ exports.login = (req, res, next) => {
                     }
                     res.status(200).json({
                         id: results[0].id,
-                        token: jwt.sign(
-                            { id: results[0].id },
-                            process.env.TOKEN,
-                            { expiresIn: '24h' }
-                        )
+                        token: jwt.sign({ id: results[0].id },process.env.TOKEN,{ expiresIn: '24h' }),
+                        message:'utlilisateur connecté'
                     })
                 }).catch(error => res.status(500).json({ error }))
         }
