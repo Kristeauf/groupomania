@@ -17,9 +17,12 @@
   },
   "homepage": "https://github.com/Kristeauf/groupomania#readme",
   "dependencies": {
+    "aes": "^0.1.0",
     "bcrypt": "^5.0.1",
     "body-parse": "^0.1.0",
     "body-parser": "^1.20.0",
+    "cookies": "^0.8.0",
+    "crypto-js": "^4.0.0",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "fs": "^0.0.1-security",
@@ -30,6 +33,7 @@
     "mysql2": "^2.3.3",
     "nodemon": "^2.0.16",
     "path": "^0.12.7",
-    "sequelize": "^6.19.2"
+    "sequelize": "^6.20.1",
+    "universal-cookie": "^4.0.4"
   }
 }
