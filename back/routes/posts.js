@@ -4,7 +4,7 @@
  const auth = require("../middleware/auth");
  const multer = require("../middleware/multer-config");
 
- router.post("/", auth, multer, postCtrl.createPost);
+ router.post("/", auth, multer, postCtrl.newPost);
 
  router.get("/", auth, postCtrl.getAllPosts);
 
