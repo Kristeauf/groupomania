@@ -17,7 +17,7 @@ exports.newPost = (req, res, next) => {
       cryptojs.enc.Utf8
     )
   ).userId;
- 
+
 
   const message = req.body.message ? req.body.message : null;
   const imageUrl = req.body.imageUrl || "";
@@ -82,14 +82,6 @@ exports.deletePost = (req, res, next) => {
   sqlParams = [`${id}`];
   connection.execute(sql, sqlParams, (error, results, fields) => {
 
-    const img = results[0].file
-    if (img) {
-      const filename = img.split('/images/')[1];
-      console.log(filename);
-      fs.unlinkSync(`images/${filename}`)
-
-
-    }
 
 
 
@@ -107,7 +99,17 @@ exports.deletePost = (req, res, next) => {
     console.log(userId);
 
     if (messageOwner === userId) {
+      
       console.log(messageOwner);
+      const img = results[0].file
+      if (img) {
+        const filename = img.split('/images/')[1];
+        console.log(filename);
+        fs.unlinkSync(`images/${filename}`)
+
+
+      }
+
       sql = `DELETE  FROM messages WHERE idMESSAGES = ?;`;
       sqlParams = [`${id}`];
       connection.execute(sql, sqlParams, (error, results, fields) => {
