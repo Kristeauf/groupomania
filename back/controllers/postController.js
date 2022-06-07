@@ -75,7 +75,7 @@ exports.getOnePost = (req, res, next) => {
 };
 exports.deletePost = (req, res, next) => {
 
-  console.log(req.file);
+
   const connection = db.connect();
   const id = req.params.id;
   sql = 'SELECT * FROM messages WHERE idMESSAGES = ?;'
@@ -99,7 +99,7 @@ exports.deletePost = (req, res, next) => {
     console.log(userId);
 
     if (messageOwner === userId) {
-      
+
       console.log(messageOwner);
       const img = results[0].file
       if (img) {
@@ -126,6 +126,81 @@ exports.deletePost = (req, res, next) => {
   });
 }
 
+exports.modifyPost = (req, res, next) => {
+
+
+  const connection = db.connect();
+  const id = req.params.id;
+  sql = 'SELECT * FROM messages WHERE idMESSAGES = ?;'
+  sqlParams = [`${id}`];
+  connection.execute(sql, sqlParams, (error, results, fields) => {
+
+
+
+
+
+    if (error) { res.status(500).json({ error: error.sqlMessage }); }
+    const messageOwner = results[0].idUSERS;
+
+    const cryptedCookie = new Cookies(req, res).get("snToken");
+
+    const userId = JSON.parse(
+      cryptojs.AES.decrypt(cryptedCookie, process.env.COOKIE_KEY).toString(
+        cryptojs.enc.Utf8
+      )
+    ).userId;
+    // console.log(userId);
+
+    if (messageOwner === userId) {
+
+      let img = results[0].file
+      if (req.file) {
+        const filename = img.split('/images/')[1];
+
+
+        fs.unlinkSync(`images/${filename}`)
+
+        img = `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
+      }
+      let imageUrl = results[0].imageUrl;
+      let message = results[0].message;
+      if (req.body.imageUrl) { imageUrl = req.body.imageUrl }
+      if (req.body.message) { message = req.body.message }
+      if (img) {
+        const filename = img.split('/images/')[1];
+        console.log(filename);
+
+        // fs.unlinkSync(`images/${filename}`)
+
+        console.log(results[0].message);
+      }
+      const param1 = message;
+      const param2 = imageUrl;
+      const param3 = img;
+      console.log(param1);
+      console.log(param2);
+      console.log(param3);
+      sql = `UPDATE messages
+     SET message = '${param1}', 
+          imageUrl='${param2}', 
+          file ='${param3}' WHERE idMESSAGES = ${id}`
+
+
+
+
+      connection.execute(sql, (error, results, fields) => {
+        if (error) { res.status(500).json({ error: error.sqlMessage }); }
+
+
+        res.status(200).json({ message: "post modifié" });
+
+      });
+
+    } else { res.status(401).json({ message: "forbidden" }) };
+
+    connection.end()
+  });
+}
 
 
 
