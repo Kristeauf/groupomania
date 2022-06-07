@@ -97,12 +97,12 @@ exports.deletePost = (req, res, next) => {
       )
     ).userId;
     console.log(userId);
-
+console.log(messageOwner);
     if (messageOwner === userId) {
 
       console.log(messageOwner);
       const img = results[0].file
-      if (img) {
+       if (img) {
         const filename = img.split('/images/')[1];
         console.log(filename);
         fs.unlinkSync(`images/${filename}`)
@@ -149,7 +149,8 @@ exports.modifyPost = (req, res, next) => {
         cryptojs.enc.Utf8
       )
     ).userId;
-    // console.log(userId);
+    console.log(userId);
+    console.log(messageOwner);
 
     if (messageOwner === userId) {
 
