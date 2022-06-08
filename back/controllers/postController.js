@@ -167,14 +167,7 @@ exports.modifyPost = (req, res, next) => {
       let message = results[0].message;
       if (req.body.imageUrl) { imageUrl = req.body.imageUrl }
       if (req.body.message) { message = req.body.message }
-      if (img) {
-        const filename = img.split('/images/')[1];
-        console.log(filename);
-
-        // fs.unlinkSync(`images/${filename}`)
-
-        console.log(results[0].message);
-      }
+     
       const param1 = message;
       const param2 = imageUrl;
       const param3 = img;
