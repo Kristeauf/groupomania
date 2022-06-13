@@ -154,17 +154,17 @@ exports.modifyPost = (req, res, next) => {
 
     if (messageOwner === userId) {
 
-      let img = results[0].file
-      if (req.file) {
-        const filename = img.split('/images/')[1];
+      
+      req.file ?( filename = img.split('/images/')[1],
 
 
-        fs.unlinkSync(`images/${filename}`)
+        fs.unlinkSync(`images/${filename}`),
 
-        img = `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
-      }
-      let imageUrl = results[0].imageUrl;
-      let message = results[0].message;
+        img = `${req.protocol}://${req.get("host")}/images/${req.file.filename}`):
+        
+       img = results[0].file
+       imageUrl = results[0].imageUrl;
+       message = results[0].message;
       if (req.body.imageUrl) { imageUrl = req.body.imageUrl }
       if (req.body.message) { message = req.body.message }
      
