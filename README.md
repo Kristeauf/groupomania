@@ -1,2 +1,0 @@
-# groupomania
-réseau social groupomania
