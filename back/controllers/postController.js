@@ -120,7 +120,7 @@ console.log(messageOwner);
 
       });
 
-    } else { res.status(401).json({ message: "forbidden" }) };
+    } else { res.status(401).json({ message: "unauthorized" }) };
 
     connection.end()
   });
@@ -190,7 +190,7 @@ exports.modifyPost = (req, res, next) => {
 
       });
 
-    } else { res.status(401).json({ message: "forbidden" }) };
+    } else { res.status(401).json({ message: "unauthorized" }) };
 
     connection.end()
   });
