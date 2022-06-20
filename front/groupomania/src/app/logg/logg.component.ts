@@ -1,11 +1,12 @@
-import { HttpClient } from '@angular/common/http';
+
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from  '@angular/forms';
 import { Router } from  '@angular/router';
+import { observable, Observable } from 'rxjs';
 
-
+import { User } from "../user";
 import { AuthService } from  '../auth.service';
- import { User} from "../user";
+
 import { UserService } from '../user.service';
 
 @Component({
@@ -20,13 +21,15 @@ export class LoggComponent implements OnInit {
  
   constructor(private authService: AuthService,
     private router: Router, private formBuilder: FormBuilder,private userService:UserService) { } //,)//
-
+   
+  
   ngOnInit() {this.loginForm  =  this.formBuilder.group({
     userName:['', Validators.required],
       email: ['', Validators.required],
       password: ['', Validators.required]
   });
    }
+  
   get formControls() { return this.loginForm.controls; }
   onConnexion(){
     // console.log(this.loginForm.value);
@@ -35,16 +38,21 @@ export class LoggComponent implements OnInit {
       return;
     }
   
-   
-    this.authService.onConnexion(this.loginForm.value);
-  
-  } 
-  
+ 
+    return this.authService.onConnexion(this.loginForm.value)
+ 
+   } 
 signUp(){
-alert(JSON.stringify(this.loginForm.value));
-  this.userService.addUser(this.loginForm.value);
+
+
+ 
+
+  this.userService.addUser(this.loginForm.value).subscribe();
   
+
+}
   
+ 
 }
     
     
@@ -61,12 +69,10 @@ alert(JSON.stringify(this.loginForm.value));
   
   
 
-}
 
 
 
 
-function addUser(value: any) {
-  throw new Error('Function not implemented.');
-}
+
+
 
