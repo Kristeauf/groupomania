@@ -17,17 +17,18 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
 import { User } from './user';
+const headers = new HttpHeaders()
+.set('content-type','application/json')
+   
 
-
+  
 
 const baseUrl = 'http://localhost:3000/api'
 @Injectable({ providedIn: 'root' })
 export class UserService {
-    constructor(private http: HttpClient ) { }
+    constructor(private http: HttpClient) { }
  
-
-
-
+       
 
  
     //     register(user: User) {
@@ -39,10 +40,10 @@ export class UserService {
     //     }
     // }
     addUser(user: User): Observable<User> {
-    
+   
      const userData = JSON.stringify(user);
-  
-        return this.http.post<User>(`${baseUrl}/auth/signup`,{userData})
+ 
+        return this.http.post<User>(`${baseUrl}/auth/signup`,userData,{headers:headers})
     }
     
 }

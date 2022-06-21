@@ -2,9 +2,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from  '@angular/forms';
 import { Router } from  '@angular/router';
-import { observable, Observable } from 'rxjs';
 
-import { User } from "../user";
+
+
 import { AuthService } from  '../auth.service';
 
 import { UserService } from '../user.service';
@@ -47,7 +47,8 @@ signUp(){
 
  
 
-  this.userService.addUser(this.loginForm.value).subscribe();
+  this.userService.addUser(this.loginForm.value).subscribe()
+  
   
 
 }
