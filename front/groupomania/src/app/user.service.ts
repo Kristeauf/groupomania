@@ -45,5 +45,17 @@ export class UserService {
  
         return this.http.post<User>(`${baseUrl}/auth/signup`,userData,{headers:headers})
     }
+    connectUser(user: User):Observable<User>{
+
+        const userData = JSON.stringify(user);
+
+       return this.http.post<User>(`${baseUrl}/auth/login`,userData,{headers:headers})
+
+    }
+    disconnectUser(user: User):Observable<User>{
+        
+       return this.http.get<User>(`${baseUrl}/auth/logout`)
+
+    }
     
 }

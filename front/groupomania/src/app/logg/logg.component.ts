@@ -52,8 +52,12 @@ signUp(){
   
 
 }
-  
- 
+  login(){
+    this.userService.connectUser(this.loginForm.value).subscribe()
+  }
+  logout(){
+    this.userService.disconnectUser(this.loginForm.value).subscribe()
+  }
 }
     
     
