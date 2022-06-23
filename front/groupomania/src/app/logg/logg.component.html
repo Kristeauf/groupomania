@@ -21,9 +21,21 @@
 
 
                   <div class="form-outline mb-4">
-                    <input type="text" placeholder="Username" id="form2Example17"
+                   <p [ngClass]="{ 'has-error': isSubmitted && formControls['userName'].errors }"> 
+                    <input ngModel="userName" formControlName="userName" type="text" placeholder="Username" id="form2Example17"
                       class="form-control form-control-lg" />
+                    </p>
                   </div>
+                  <div *ngIf="isSubmitted && formControls['userName'].errors" class="help-block">
+                    <div *ngIf="formControls['userName'].errors['required']">
+                      <font color="red">Le nom d'utilisateur est requis</font>
+                    </div>
+                  </div>
+
+
+
+
+
                   <div class="form-outline mb-4">
                     <input type="email" placeholder="Email" id="form2Example17" class="form-control form-control-lg" />
 
@@ -44,11 +56,11 @@
                   <div class="buttons">
                     <div class="pt-1 mb-4">
                       <button class="btn btn-lg btn-block" style="color:blanchedalmond;background-color: #fd0909;"
-                        type="button">Enregistrement</button>
+                        type="submit" (click)="signUp()">Enregistrement</button>
                     </div>
                     <div class="pt-1 mb-4 mr-50">
                       <button class="btn btn-lg btn-block" style="color:blanchedalmond;background-color: #fd0909;"
-                        type="button">Connexion</button>
+                        type="button" (click)="login()" >Connexion</button>
                     </div>
                   </div>
 
