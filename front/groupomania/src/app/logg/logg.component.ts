@@ -1,4 +1,5 @@
 
+import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from  '@angular/forms';
 import { Router } from  '@angular/router';
@@ -21,12 +22,15 @@ export class LoggComponent implements OnInit {
  
   constructor(private authService: AuthService,
     private router: Router, private formBuilder: FormBuilder,private userService:UserService) { } //,)//
+    namePattern = "^[A-Za-z0-9_-]{5,15}$";
+    pwdPattern = "^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{6,12}$";
    
+    emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
   
   ngOnInit() {this.loginForm  =  this.formBuilder.group({
-    userName:['', Validators.required],
-      email: ['', Validators.required],
-      password: ['', Validators.required]
+    userName:['',Validators.required, Validators.pattern(this.namePattern)],
+      email: ['',Validators.required, Validators.pattern(this.emailPattern)],
+      password: ['', Validators.required, Validators.pattern(this.pwdPattern)]
   });
    }
   
@@ -34,7 +38,9 @@ export class LoggComponent implements OnInit {
   onConnexion(){
     // console.log(this.loginForm.value);
     this.isSubmitted = true;
-    if(this.loginForm.invalid){
+    if(this.loginForm.invalid){ 
+     
+      
       return;
     }
   
@@ -45,18 +51,27 @@ export class LoggComponent implements OnInit {
 signUp(){
 
 
- 
 
-  this.userService.addUser(this.loginForm.value).subscribe()
+
+ this.authService.onConnexion(this.loginForm.value);
+
+  this.userService.addUser(this.loginForm.value).subscribe();
   
   
 
 }
   login(){
-    this.userService.connectUser(this.loginForm.value).subscribe()
+   
+    this.userService.connectUser(this.loginForm.value).subscribe();
+     this.authService.login();
   }
   logout(){
-    this.userService.disconnectUser(this.loginForm.value).subscribe()
+  
+  
+    this.userService.disconnectUser(this.loginForm.value).subscribe();
+    this.authService.logout();
+console.log(localStorage);
+
   }
 }
     

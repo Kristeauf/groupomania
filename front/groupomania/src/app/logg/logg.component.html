@@ -1,37 +1,123 @@
+<section class="vh-100" style="background-color: #fd0909;">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col col-xl-10">
+        <div class="card" style="border-radius: 1rem;">
+          <div class="row g-0">
 
-<h1 style="text-align:center">Bienvenu sur GROUPOMANIA</h1>
-  <div class="login">
-    <h2 class="login-header">S'identifier</h2>
-    <form [formGroup]="loginForm" class="login-container" (ngSubmit)="onConnexion()">
-        <p [ngClass]="{ 'has-error': isSubmitted && formControls['userName'].errors }">
-            <input ngModel="userName"  type="text" placeholder="userName" formControlName="userName">
-          </p>
-          <div *ngIf="isSubmitted && formControls['userName'].errors" class="help-block">
-            <div *ngIf="formControls['userName'].errors['required']"><font color="red">Le nom d'utilisateur est requis</font></div>
+            <div class="col-md-6 col-lg-7 d-flex align-items-center">
+              <div class="card-body p-4 p-lg-5 text-black">
+
+                <form [formGroup]="loginForm" (ngSubmit)="onConnexion()">
+
+                  <div class="d-flex align-items-center mb-3 pb-1">
+                    <img class="logo" [src]="'../../assets/public/logo.png'" alt="Logo" class="img-fluid"
+                      style="border-radius: 1rem 0 0 1rem;" />
+
+                  </div>
+
+                  <h4 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;text-align: center;">Entrez dans le réseau
+                    social </h4>
+
+
+                  <div class="form-outline mb-4">
+                    <input type="text" placeholder="Username" id="form2Example17"
+                      class="form-control form-control-lg" />
+                  </div>
+                  <div class="form-outline mb-4">
+                    <input type="email" placeholder="Email" id="form2Example17" class="form-control form-control-lg" />
+
+                  </div>
+
+
+
+
+                  <div class="form-outline mb-4">
+                    <input type="password" placeholder="Password" id="form2Example27"
+                      class="form-control form-control-lg" />
+
+                  </div>
+
+
+
+
+                  <div class="buttons">
+                    <div class="pt-1 mb-4">
+                      <button class="btn btn-lg btn-block" style="color:blanchedalmond;background-color: #fd0909;"
+                        type="button">Enregistrement</button>
+                    </div>
+                    <div class="pt-1 mb-4 mr-50">
+                      <button class="btn btn-lg btn-block" style="color:blanchedalmond;background-color: #fd0909;"
+                        type="button">Connexion</button>
+                    </div>
+                  </div>
+
+
+
+
+                  <a href="#!" class="small text-muted">Terms of use.</a>
+                  <a href="#!" class="small text-muted">Privacy policy</a>
+                </form>
+
+              </div>
+            </div>
           </div>
-      <p [ngClass]="{ 'has-error': isSubmitted && formControls['email'].errors }">
-        <input ngModel="email"  type="email" placeholder="Email" formControlName="email">
-      </p>
-  
-      <div *ngIf="isSubmitted && formControls['email'].errors" class="help-block">
-        <div *ngIf="formControls['email'].errors['required']"><font color="red">L'email est requis</font></div>
+        </div>
       </div>
-  
-      <p [ngClass]="{ 'has-error': isSubmitted && formControls['password'].errors }">
-        <input ngModel="password" type="password" placeholder="Password" formControlName="password">
-      </p>
-  
-      <div *ngIf="isSubmitted && formControls['password'].errors" class="help-block">
-        <div *ngIf="formControls['password'].errors['required']"><font color="red">Mot de passe requis</font></div>
-      </div>
-  
-      <p>
-        <input type="submit" value="inscription" (click)="signUp()">
-      </p>
-      <p>
-        <input type="submit" value="Log in"(click)="login()">
-      </p><p>
-        <input type="submit" value="Log out"(click)="logout()">
-      </p>
-    </form>
+    </div>
   </div>
+</section>
+
+
+
+
+<!-- <h1 style="text-align:center">Bienvenu sur GROUPOMANIA</h1>
+<div class="login">
+  <h2 class="login-header">S'identifier</h2>
+  <form [formGroup]="loginForm" class="login-container" (ngSubmit)="onConnexion()">
+
+    <p [ngClass]="{ 'has-error': isSubmitted && formControls['userName'].errors }">
+      <input ngModel="userName" type="text" placeholder="userName" formControlName="userName">
+    </p>
+    <div *ngIf="isSubmitted && formControls['userName'].errors" class="help-block">
+      <div *ngIf="formControls['userName'].errors['required']">
+        <font color="red">Le nom d'utilisateur est requis</font>
+      </div>
+    </div>
+
+
+
+    <p [ngClass]="{ 'has-error': isSubmitted && formControls['email'].errors }">
+      <input ngModel="email" type="email" placeholder="Email" formControlName="email">
+    </p>
+    <div *ngIf="isSubmitted && formControls['email'].errors" class="help-block">
+      <div *ngIf="formControls['email'].errors['required']">
+        <font color="red">L'email est requis</font>
+      </div>
+    </div>
+
+
+
+
+
+    <p [ngClass]="{ 'has-error': isSubmitted && formControls['password'].errors }">
+      <input ngModel="password" type="password" placeholder="Password" formControlName="password">
+    </p>
+
+    <div *ngIf="isSubmitted && formControls['password'].errors" class="help-block">
+      <div *ngIf="formControls['password'].errors['required']">
+        <font color="red">Mot de passe requis</font>
+      </div>
+    </div>
+
+    <p>
+      <input type="submit" value="inscription" (click)="signUp()">
+    </p>
+    <p>
+      <input type="submit" value="Log in" (click)="login()">
+    </p>
+    <p>
+      <input type="submit" value="Log out" (click)="logout()">
+    </p>
+  </form>
+</div> -->

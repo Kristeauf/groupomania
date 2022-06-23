@@ -11,11 +11,11 @@ export class AuthService {
     console.log(localStorage);
     
   }
-  public isConnected(){
+  public login(){
     return localStorage.getItem('ACCESS_TOKEN') !== null;
 
   }
-  public deconnected(){
+  public logout(){
     localStorage.removeItem('ACCESS_TOKEN');
   }
 }
