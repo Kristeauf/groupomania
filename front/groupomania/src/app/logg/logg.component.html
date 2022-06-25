@@ -18,40 +18,60 @@
 
                   <h4 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;text-align: center;">Entrez dans le réseau
                     social </h4>
-
+<pre>{{this.loginForm.value|json}}</pre>
 
                   <div class="form-outline mb-4">
-                   <p [ngClass]="{ 'has-error': isSubmitted && formControls['userName'].errors }"> 
-                    <input ngModel="userName" formControlName="userName" type="text" placeholder="Username" id="form2Example17"
-                      class="form-control form-control-lg" />
+                    <p [ngClass]="{ 'has-error': isSubmitted && formControls['userName'].errors }">
+                      <input  formControlName="userName" type="text" placeholder="nom d'utilisateur"
+                        id="form2Example17" class="form-control form-control-lg" />
                     </p>
+                    <div *ngIf="isSubmitted && formControls['userName'].errors" class="help-block">
+                      <div *ngIf="formControls['userName'].errors['required']">
+                        <font color="red">Le nom d'utilisateur est requis</font>
+                      </div>
+                      <div *ngIf="formControls['userName'].errors['pattern']">
+                        <font color="red">!min 5 lettres ou chiffres sans accents ni caracteres speciaux</font>
+                      </div>
+                    </div>
                   </div>
-                  <div *ngIf="isSubmitted && formControls['userName'].errors" class="help-block">
-                    <div *ngIf="formControls['userName'].errors['required']">
-                      <font color="red">Le nom d'utilisateur est requis</font>
+                  <div class="form-outline mb-4">
+                    <p [ngClass]="{ 'has-error': isSubmitted && formControls['email'].errors }">
+                      <input  formControlName="email" type="email" placeholder="Email"
+                        id="form2Example17" class="form-control form-control-lg" />
+                    </p>
+                    <div *ngIf="isSubmitted && formControls['email'].errors" class="help-block">
+                      <div *ngIf="formControls['email'].errors['required']">
+                        <font color="red">L'email est requis</font>
+                      </div>
+                    </div>
+                    <div *ngIf="isSubmitted && formControls['email'].errors" class="help-block">
+                      <div *ngIf="formControls['email'].errors['pattern']">
+                        <font color="red">format d'email incorrect</font>
+                      </div>
                     </div>
                   </div>
 
-
-
-
-
                   <div class="form-outline mb-4">
-                    <input type="email" placeholder="Email" id="form2Example17" class="form-control form-control-lg" />
-
+                    <p [ngClass]="{ 'has-error': isSubmitted && formControls['password'].errors }">
+                      <input  formControlName="password" type="password" placeholder="Password"
+                        id="form2Example17" class="form-control form-control-lg" />
+                    </p>
+                    <div *ngIf="formControls['password'].errors" class="help-block">
+                      <div *ngIf="formControls['password'].errors['required']">
+                        <font color="red">Le mot de passe est requis</font>
+                      </div>
+                    </div>
+                    <div *ngIf="isSubmitted && formControls['password'].errors" class="help-block">
+                      <div *ngIf="formControls['password'].errors['pattern']">
+                        <font color="red">Le mot de passe doit contenir au minimum 8 caractères,une majuscule et un chiffre</font>
+                      </div>
+                    </div>
+                    
                   </div>
 
 
 
-
-                  <div class="form-outline mb-4">
-                    <input type="password" placeholder="Password" id="form2Example27"
-                      class="form-control form-control-lg" />
-
-                  </div>
-
-
-
+                
 
                   <div class="buttons">
                     <div class="pt-1 mb-4">
@@ -60,7 +80,7 @@
                     </div>
                     <div class="pt-1 mb-4 mr-50">
                       <button class="btn btn-lg btn-block" style="color:blanchedalmond;background-color: #fd0909;"
-                        type="button" (click)="login()" >Connexion</button>
+                        type="button" (click)="login()">Connexion</button>
                     </div>
                   </div>
 

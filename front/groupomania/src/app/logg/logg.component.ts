@@ -23,14 +23,13 @@ export class LoggComponent implements OnInit {
   constructor(private authService: AuthService,
     private router: Router, private formBuilder: FormBuilder,private userService:UserService) { } //,)//
     namePattern = "^[A-Za-z0-9_-]{5,15}$";
-    pwdPattern = "^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{6,12}$";
    
     emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
-  
+   pwdPattern ="^(?=.*[A-Z])(?=.*[0-9]).{8,}$";
   ngOnInit() {this.loginForm  =  this.formBuilder.group({
-    userName:['',Validators.required, Validators.pattern(this.namePattern)],
-      email: ['',Validators.required, Validators.pattern(this.emailPattern)],
-      password: ['', Validators.required, Validators.pattern(this.pwdPattern)]
+    userName:['',[Validators.required, Validators.pattern(this.namePattern)]],
+      email: ['',[Validators.required, Validators.pattern(this.emailPattern)]],
+      password: ['', [Validators.required, Validators.pattern(this.pwdPattern)]]
   });
    }
   
@@ -39,13 +38,14 @@ export class LoggComponent implements OnInit {
     // console.log(this.loginForm.value);
     this.isSubmitted = true;
     if(this.loginForm.invalid){ 
+      alert('ko')
      
       
       return;
     }
   
  
-    return this.authService.onConnexion(this.loginForm.value)
+  
  
    } 
 signUp(){
@@ -53,7 +53,6 @@ signUp(){
 
 
 
- this.authService.onConnexion(this.loginForm.value);
 
   this.userService.addUser(this.loginForm.value).subscribe();
   
@@ -63,7 +62,7 @@ signUp(){
   login(){
    
     this.userService.connectUser(this.loginForm.value).subscribe();
-     this.authService.login();
+     this.loginForm.reset()
   }
   logout(){
   
