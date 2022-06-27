@@ -2,7 +2,7 @@
 
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Component, ErrorHandler, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 
@@ -22,11 +22,11 @@ import { UserService } from '../user.service';
 })
 export class LoggComponent implements OnInit {
 
-  loginForm!: FormGroup;
+  loginForm!: UntypedFormGroup;
   isSubmitted = false;
 
   constructor(private authService: AuthService,
-    private router: Router, private formBuilder: FormBuilder, private userService: UserService) { } //,)//
+    private router: Router, private formBuilder: UntypedFormBuilder, private userService: UserService) { } //,)//
   namePattern = "^[A-Za-z0-9_-]{5,15}$";
 
   emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";

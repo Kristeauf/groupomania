@@ -102,5 +102,7 @@
       }
     }
   },
-  "defaultProject": "groupomania"
+  "cli": {
+    "analytics": false
+  }
 }
