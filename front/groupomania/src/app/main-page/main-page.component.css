@@ -1,0 +1,26 @@
+div.navbar{
+    width:100%
+}
+nav ul{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+  font-size: 1.3rem;
+   
+    align-items: center;
+}
+nav ul li{
+    list-style-type: none;
+    
+}
+li a{
+    color:#fd0909; 
+    font-weight: bolder;
+   
+}
+li a:hover{
+    font-weight: bolder;
+   background-color:#fd0909; 
+   color: blanchedalmond;
+   transition: 0.5s;
+}

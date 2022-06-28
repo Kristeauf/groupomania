@@ -1,11 +1,11 @@
 
 
-import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
-import { Component, ErrorHandler, OnInit } from '@angular/core';
+
+import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-
-
+import{CookieService} from'ngx-cookie-service'
+import { HttpHeaders, HttpResponse } from '@angular/common/http';
 
 
 
@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 
 import { UserService } from '../user.service';
+
 
 @Component({
   selector: 'app-logg',
@@ -26,7 +27,7 @@ export class LoggComponent implements OnInit {
   isSubmitted = false;
 
   constructor(private authService: AuthService,
-    private router: Router, private formBuilder: UntypedFormBuilder, private userService: UserService) { } //,)//
+    private router: Router, private formBuilder: UntypedFormBuilder,  private userService: UserService, private cookieService:CookieService) { } //,)//
   namePattern = "^[A-Za-z0-9_-]{5,15}$";
 
   emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
@@ -57,10 +58,13 @@ export class LoggComponent implements OnInit {
   signUp() {
      this.isSubmitted = true;   
     this.userService.addUser(this.loginForm.value).subscribe(Response => {
-     console.log(HttpResponse);
-     alert(JSON.stringify(Response))
+    
+    
+     
+     
+      
      }
-        
+       
       
       
    
@@ -74,15 +78,24 @@ export class LoggComponent implements OnInit {
 
 login() {
 
-  this.userService.connectUser(this.loginForm.value).subscribe();
-  this.loginForm.reset()
+  this.userService.connectUser(this.loginForm.value).subscribe((res)=>{
+    
+   
+   
+    
+    this.router.navigate(['mainpage'])
+  return this.cookieService.get('snToken')
+     })
+
+
 }
+    
 logout() {
 
 
   this.userService.disconnectUser(this.loginForm.value).subscribe();
   this.authService.logout();
-  console.log(localStorage);
+  
 
 }
 }

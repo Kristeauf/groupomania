@@ -19,9 +19,10 @@ import { Observable } from 'rxjs';
 import { User } from './user';
 const headers = new HttpHeaders()
 .set('content-type','application/json')
-   
 
+.set('authorization','Access Token')
   
+ 
 
 const baseUrl = 'http://localhost:3000/api'
 @Injectable({ providedIn: 'root' })
