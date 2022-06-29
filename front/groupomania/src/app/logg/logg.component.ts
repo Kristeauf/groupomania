@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import{CookieService} from'ngx-cookie-service'
-import { HttpHeaders, HttpResponse } from '@angular/common/http';
+
 
 
 
@@ -27,7 +27,7 @@ export class LoggComponent implements OnInit {
   isSubmitted = false;
 
   constructor(private authService: AuthService,
-    private router: Router, private formBuilder: UntypedFormBuilder,  private userService: UserService, private cookieService:CookieService) { } //,)//
+    private router: Router, private formBuilder: UntypedFormBuilder, private userService: UserService, private cookieService:CookieService) { } //,)//
   namePattern = "^[A-Za-z0-9_-]{5,15}$";
 
   emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
@@ -79,12 +79,22 @@ export class LoggComponent implements OnInit {
 login() {
 
   this.userService.connectUser(this.loginForm.value).subscribe((res)=>{
+    const idUSERS = res.id;
     
+    const username = res.userName;
+    
+   
+this.cookieService.set('userdata',username)
+this.cookieService.set('userId', `${idUSERS}`)
+  
+   
+  
+   
    
    
     
     this.router.navigate(['mainpage'])
-  return this.cookieService.get('snToken')
+  
      })
 
 

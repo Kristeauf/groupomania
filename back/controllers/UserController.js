@@ -77,6 +77,7 @@ exports.login = (req, res, next) => {
 
                     res.status(200).json({
                         id: results[0].id,
+                        userName:results[0].userName,
                         message: 'utlilisateur connecté'
 
                     })

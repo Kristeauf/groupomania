@@ -16,3 +16,13 @@
       </div>
     </div>
   </nav>
+  <form [formGroup]="postForm" >
+   <h2 formControlName="username">bienvenue {{ username}} </h2>
+    <input type="text" formControlName="message">
+    <input type="file" formControlName="file" >
+    <div formControlName="created_at"></div>
+   <button type="submit">Ajouter le post</button>
+
+
+
+  </form>
