@@ -1,7 +1,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-white">
     <div class="container-fluid">
-     
+     <pre>{{this.postForm.value|json}}</pre>
       <div class="navbar">
         
         <ul>
@@ -16,11 +16,18 @@
       </div>
     </div>
   </nav>
-  <form [formGroup]="postForm" >
-   <h2 formControlName="username">bienvenue {{ username}} </h2>
+  <form [formGroup]="postForm" (ngSubmit)="createPost()">
+   <h2 >bienvenue {{ username}} </h2>
     <input type="text" formControlName="message">
-    <input type="file" formControlName="file" >
-    <div formControlName="created_at"></div>
+    <input accept="image/*" class="file-input" type="file" multiple style="width: 100%;"formControlName="file" >
+   
+    
+    <div class="imgFile">
+   <img [src]= "file"  >
+    </div>
+    <button ></button>
+    <input type="urls" formControlName="imageUrl">
+    <div ></div>
    <button type="submit">Ajouter le post</button>
 
 

@@ -93,7 +93,7 @@ this.cookieService.set('userId', `${idUSERS}`)
    
    
     
-    this.router.navigate(['mainpage'])
+    this.router.navigate(['postpage'])
   
      })
 

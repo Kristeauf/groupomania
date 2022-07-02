@@ -24,3 +24,9 @@ li a:hover{
    color: blanchedalmond;
    transition: 0.5s;
 }
+div.imgFile{
+   
+    width: 800px;
+    height: 400px;
+
+}

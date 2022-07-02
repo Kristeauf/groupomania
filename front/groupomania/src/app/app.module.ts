@@ -5,13 +5,18 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoggComponent } from './logg/logg.component';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { MainPageComponent } from './main-page/main-page.component';
+import { CreatePostComponent } from './createPost/createPost.component';
+import { PostPageComponent } from './post-page/post-page.component';
+import { LoginInterceptorProvider } from './interceptors/login.interceptor';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoggComponent,
-    MainPageComponent
+ CreatePostComponent,
+ PostPageComponent
+  
+    
   ],
   imports: [
     BrowserModule,
@@ -21,7 +26,9 @@ import { MainPageComponent } from './main-page/main-page.component';
     FormsModule,
     ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [
+    LoginInterceptorProvider
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

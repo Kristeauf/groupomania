@@ -19,7 +19,7 @@ import { Observable } from 'rxjs';
 import { User } from './user';
 const headers = new HttpHeaders()
 .set('content-type','application/json')
-
+.set('Authorization','Sntoken')
 
 
 

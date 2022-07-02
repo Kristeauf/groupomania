@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { Post } from './Post';
 const headers = new HttpHeaders()
 .set('content-type','application/json')
+.set('Authorization','Sntoken')
 
 
 
@@ -31,13 +32,13 @@ export class PostsService {
  
         return this.http.post<Post>(`${baseUrl}/posts`,postData,{headers:headers})
     }
-//     connectUser(user: User):Observable<User>{
+    getPosts(post: Post):Observable<Post>{
 
-//         const userData = JSON.stringify(user);
+         const postData = JSON.stringify(post);
 
-//        return this.http.post<User>(`${baseUrl}/auth/login`,userData,{headers:headers})
+     return this.http.get<Post>(`${baseUrl}/posts`,{headers:headers})
 
-//     }
+    }
 //     disconnectUser(user: User):Observable<User>{
         
 //        return this.http.get<User>(`${baseUrl}/auth/logout`)
