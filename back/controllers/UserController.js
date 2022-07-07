@@ -61,25 +61,26 @@ exports.login = (req, res, next) => {
                     );
 
                     // Envoi du token & userId dans un cookie
-                    const cookieContent = {
-                        token: newToken,
-                        userId: results[0].id,
-                    };
+                    // const cookieContent = {
+                    //     token: newToken,
+                    //     userId: results[0].id,
+                    // };
 
-                    const cryptedCookie = cryptojs.AES.encrypt(
-                        JSON.stringify(cookieContent),
-                        process.env.COOKIE_KEY
-                    ).toString();
-                    new Cookies(req, res).set("snToken", cryptedCookie, {
-                        httpOnly: true,
-                        maxAge: 3600000, // 1 heure
-                    });
+                    // const cryptedCookie = cryptojs.AES.encrypt(
+                    //     JSON.stringify(cookieContent),
+                    //     process.env.COOKIE_KEY
+                    // ).toString();
+                    // new Cookies(req, res).set("snToken", cryptedCookie, {
+                    //     httpOnly: true,
+                    //     maxAge: 3600000, // 1 heure
+                    // });
 
                     res.status(200).json({
                         id: results[0].id,
                         userName:results[0].userName,
-                        message: 'utlilisateur connecté'
-
+                        Token:newToken,
+                        message: 'utlilisateur connecté',
+                       
                     })
 
 

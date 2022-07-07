@@ -43,7 +43,7 @@ export class UserService {
    
      const userData = JSON.stringify(user);
  
-        return this.http.post<User>(`${baseUrl}/auth/signup`,userData,{headers:headers})
+        return this.http.post<User>(`${baseUrl}/auth/signup`,userData,{headers:headers,})
     }
     connectUser(user: User):Observable<User>{
 

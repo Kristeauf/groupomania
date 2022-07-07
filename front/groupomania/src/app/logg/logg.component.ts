@@ -1,18 +1,12 @@
 
 
 
+
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import{CookieService} from'ngx-cookie-service'
-
-
-
-
-
-
+import { CookieService } from 'ngx-cookie-service'
 import { AuthService } from '../auth.service';
-
 import { UserService } from '../user.service';
 
 
@@ -27,7 +21,7 @@ export class LoggComponent implements OnInit {
   isSubmitted = false;
 
   constructor(private authService: AuthService,
-    private router: Router, private formBuilder: UntypedFormBuilder, private userService: UserService, private cookieService:CookieService) { } //,)//
+    private router: Router, private formBuilder: UntypedFormBuilder, private userService: UserService, private cookieService: CookieService) { } //,)//
   namePattern = "^[A-Za-z0-9_-]{5,15}$";
 
   emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
@@ -56,58 +50,60 @@ export class LoggComponent implements OnInit {
 
   // }
   signUp() {
-     this.isSubmitted = true;   
+    this.isSubmitted = true;
     this.userService.addUser(this.loginForm.value).subscribe(Response => {
-    
-    
-     
-     
-      
-     }
-       
-      
-      
-   
-     
+
+alert(JSON.stringify(Response))
+
+
+
+
+    }
+
+
+
+
+
     )
-      
-    
+
+
   }
 
-  
 
-login() {
 
-  this.userService.connectUser(this.loginForm.value).subscribe((res)=>{
-    const idUSERS = res.id;
+  login() {
     
-    const username = res.userName;
-    
-   
-this.cookieService.set('userdata',username)
-this.cookieService.set('userId', `${idUSERS}`)
-  
-   
-  
-   
-   
-   
-    
-    this.router.navigate(['postpage'])
-  
-     })
+    this.userService.connectUser(this.loginForm.value).subscribe((res) => {
+      alert(JSON.stringify(res.email))
+      const idUSERS = res.id;
+
+      const username = res.userName;
 
 
-}
-    
-logout() {
+      this.cookieService.set('userdata', username)
+      this.cookieService.set('userId', `${idUSERS}`)
 
 
-  this.userService.disconnectUser(this.loginForm.value).subscribe();
-  this.authService.logout();
-  
 
-}
+
+
+
+
+      this.router.navigate(['postpage'])
+
+    })
+
+
+  }
+
+  logout() {
+
+
+    this.userService.disconnectUser(this.loginForm.value).subscribe();
+    this.authService.logout();
+
+
+  }
 }
 
 

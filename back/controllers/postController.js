@@ -10,15 +10,15 @@ const AES = require("crypto-js/aes")
 exports.newPost = (req, res, next) => {
 
   const connection = db.connect();
-  console.log(req.file);
-  const cryptedCookie = new Cookies(req, res).get("snToken");
-  const userId = JSON.parse(
-    cryptojs.AES.decrypt(cryptedCookie, process.env.COOKIE_KEY).toString(
-      cryptojs.enc.Utf8
-    )
-  ).userId;
 
+  // const cryptedCookie = new Cookies(req, res).get("snToken");
+  // const userId = JSON.parse(
+  //   cryptojs.AES.decrypt(cryptedCookie, process.env.COOKIE_KEY).toString(
+  //     cryptojs.enc.Utf8
+  //   )
+  // ).userId;
 
+  const userId = req.auth.userId;
   const message = req.body.message ? req.body.message : null;
   const imageUrl = req.body.imageUrl || "";
   let image = "";
@@ -90,19 +90,19 @@ exports.deletePost = (req, res, next) => {
     const messageOwner = results[0].idUSERS;
 
     const cryptedCookie = new Cookies(req, res).get("snToken");
-
-    const userId = JSON.parse(
-      cryptojs.AES.decrypt(cryptedCookie, process.env.COOKIE_KEY).toString(
-        cryptojs.enc.Utf8
-      )
-    ).userId;
-    console.log(userId);
-console.log(messageOwner);
+    const userId = req.auth.userId;
+    // const userId = JSON.parse(
+    //   cryptojs.AES.decrypt(cryptedCookie, process.env.COOKIE_KEY).toString(
+    //     cryptojs.enc.Utf8
+    //   )
+    // ).userId;
+    // console.log(userId);
+    console.log(messageOwner);
     if (messageOwner === userId) {
 
       console.log(messageOwner);
       const img = results[0].file
-       if (img) {
+      if (img) {
         const filename = img.split('/images/')[1];
         console.log(filename);
         fs.unlinkSync(`images/${filename}`)
@@ -142,32 +142,33 @@ exports.modifyPost = (req, res, next) => {
     if (error) { res.status(500).json({ error: error.sqlMessage }); }
     const messageOwner = results[0].idUSERS;
 
-    const cryptedCookie = new Cookies(req, res).get("snToken");
+    // const cryptedCookie = new Cookies(req, res).get("snToken");
 
-    const userId = JSON.parse(
-      cryptojs.AES.decrypt(cryptedCookie, process.env.COOKIE_KEY).toString(
-        cryptojs.enc.Utf8
-      )
-    ).userId;
-    console.log(userId);
+    // const userId = JSON.parse(
+    //   cryptojs.AES.decrypt(cryptedCookie, process.env.COOKIE_KEY).toString(
+    //     cryptojs.enc.Utf8
+    //   )
+    // ).userId;
+    // console.log(userId);
+    const userId=req.auth.userId;
     console.log(messageOwner);
 
     if (messageOwner === userId) {
 
-      
-      req.file ?( filename = img.split('/images/')[1],
+
+      req.file ? (filename = img.split('/images/')[1],
 
 
         fs.unlinkSync(`images/${filename}`),
 
-        img = `${req.protocol}://${req.get("host")}/images/${req.file.filename}`):
-        
-       img = results[0].file
-       imageUrl = results[0].imageUrl;
-       message = results[0].message;
+        img = `${req.protocol}://${req.get("host")}/images/${req.file.filename}`) :
+
+        img = results[0].file
+      imageUrl = results[0].imageUrl;
+      message = results[0].message;
       if (req.body.imageUrl) { imageUrl = req.body.imageUrl }
       if (req.body.message) { message = req.body.message }
-     
+
       const param1 = message;
       const param2 = imageUrl;
       const param3 = img;
