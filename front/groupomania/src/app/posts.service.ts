@@ -27,14 +27,14 @@ export class PostsService {
     //     }
     // }
     addPost(post: Post): Observable<Post> {
-   
+       
      const postData = JSON.stringify(post);
  
         return this.http.post<Post>(`${baseUrl}/posts`,postData,{headers:headers})
     }
     getPosts(post: Post):Observable<Post>{
 
-         const postData = JSON.stringify(post);
+        //  const postData = JSON.stringify(post);
 
      return this.http.get<Post>(`${baseUrl}/posts`,{headers:headers})
 

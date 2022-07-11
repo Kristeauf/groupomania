@@ -64,7 +64,7 @@ export class AuthService {
   private setCredentials(credentials: Credentials) {
     this.cookies.set("token", credentials.token);
     this.cookies.set("userId", credentials.userId);
-    this.cookies.set("userRole", credentials.userRole);
+    
   }
 
   /**
@@ -78,18 +78,12 @@ export class AuthService {
     const token = this.cookies.get("token");
     const userId = this.cookies.get("userId");
     const userRole = this.cookies.get("userRole");
-    return { userId, token, userRole };
+    return { userId, token };
   }
 
   /**
-   * Check if logged user is an admin
-   * @returns boolean
-   */
-  isAdmin(): boolean {
-    const { userRole } = this.getCredentials();
-    return this.isAuth() && userRole === "admin";
-  }
-
+   
+ 
   /**
    * Check if user has authorization
    * @returns boolean

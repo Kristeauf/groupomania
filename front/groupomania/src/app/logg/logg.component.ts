@@ -53,55 +53,27 @@ export class LoggComponent implements OnInit {
     this.isSubmitted = true;
     this.userService.addUser(this.loginForm.value).subscribe(Response => {
 
-alert(JSON.stringify(Response))
-
-
-
+      alert(JSON.stringify(Response))
 
     }
-
-
-
-
-
     )
-
-
   }
 
-
-
   login() {
-    
+
     this.userService.connectUser(this.loginForm.value).subscribe((res) => {
-      alert(JSON.stringify(res.email))
+
       const idUSERS = res.id;
 
       const username = res.userName;
 
-
-      this.cookieService.set('userdata', username)
-      this.cookieService.set('userId', `${idUSERS}`)
-
-
-
-
-
-
-
       this.router.navigate(['postpage'])
 
     })
-
-
   }
-
   logout() {
-
-
     this.userService.disconnectUser(this.loginForm.value).subscribe();
     this.authService.logout();
-
 
   }
 }

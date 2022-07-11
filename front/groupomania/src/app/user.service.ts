@@ -18,8 +18,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from './user';
 const headers = new HttpHeaders()
-.set('content-type','application/json')
-.set('Authorization','Sntoken')
+ .set('content-type','application/json')
+ .set('Authorization','Sntoken')
 
 
 
@@ -43,7 +43,7 @@ export class UserService {
    
      const userData = JSON.stringify(user);
  
-        return this.http.post<User>(`${baseUrl}/auth/signup`,userData,{headers:headers,})
+        return this.http.post<User>(`${baseUrl}/auth/signup`,userData,{headers:headers})
     }
     connectUser(user: User):Observable<User>{
 
